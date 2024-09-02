@@ -19,12 +19,11 @@ import {
 import {
   Colors,
   DebugInstructions,
-  LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Section from './src/components/Section/Section';
-import Header from './src/components/Header/Header';
-import Back from './src/components/Icons/Back/Back';
+import Section from '@components/Section/Section';
+import Header from '@components/Header/Header';
+import Back from '@components/Icons/Back/Back';
 
 const App = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -42,7 +41,11 @@ const App = (): React.JSX.Element => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header headerText="Home" />
+        <Header
+          leftNode={<Back color="black" width={32} height={32} />}
+          headerText="Home"
+        />
+
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,

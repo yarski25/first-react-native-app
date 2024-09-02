@@ -3,15 +3,15 @@ import React from 'react';
 import Svg, {Path, SvgProps} from 'react-native-svg';
 
 type IconProps = SvgProps & {
-  width?: string;
-  height?: string;
+  width?: number;
+  height?: number;
   color?: string;
 };
 
 const Back: React.FC<IconProps> = ({
   color = 'currentColor',
-  height = '1em',
-  width = '1em',
+  height = 16,
+  width = 16,
   ...props
 }) => {
   return (

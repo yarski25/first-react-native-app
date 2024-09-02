@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     textAlign: 'center',
     alignContent: 'space-between',
+    padding: 4,
     // backgroundColor: 'black',
   },
   leftItem: {flex: 1},
