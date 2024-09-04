@@ -21,9 +21,10 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Section from '@components/Section/Section';
-import Header from '@components/Header/Header';
-import Back from '@components/Icons/Back/Back';
+import Section from 'components/Section/Section';
+import Header from 'components/Header/Header';
+import Back from 'components/Icons/Back/Back';
+import Avatar from 'assets/icons/svg/avatar.svg';
 
 const App = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -45,11 +46,11 @@ const App = (): React.JSX.Element => {
           leftNode={<Back color="black" width={32} height={32} />}
           headerText="Home"
         />
-
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Avatar />
           <Section title="Step One">
             Edit <Text style={{fontWeight: 700}}>App.tsx</Text> to change this
             screen and then come back to see your edits.
