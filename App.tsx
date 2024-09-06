@@ -45,12 +45,12 @@ const App = (): React.JSX.Element => {
         <Header
           leftNode={<Back color="black" width={32} height={32} />}
           headerText="Home"
+          rightNode={<Avatar width={32} height={32} />}
         />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Avatar />
           <Section title="Step One">
             Edit <Text style={{fontWeight: 700}}>App.tsx</Text> to change this
             screen and then come back to see your edits.
