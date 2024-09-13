@@ -16,6 +16,7 @@ import {
   useColorScheme,
   View,
   PermissionsAndroid,
+  DeviceEventEmitter,
 } from 'react-native';
 
 import {Colors, DebugInstructions} from 'react-native/Libraries/NewAppScreen';
@@ -26,6 +27,17 @@ import Avatar from 'assets/icons/svg/avatar.svg';
 import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
+import {NativeModules} from 'react-native';
+
+const {CalendarServiceManager, NmeaService} = NativeModules;
+
+// function findNumberOfSatellites(context){
+//     NativeModules.ToastExample.show("It's Starting to find satellites!", 1);
+//     var count = "searching...";
+//     NativeModules.ToastExample.getCoors();
+//     context.setState({satellites : count});
+
+//     }
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -88,6 +100,28 @@ const App = (): React.JSX.Element => {
     console.log(location);
   };
 
+  const createCalendar = () => {
+    CalendarServiceManager.createCalendarEvent('testName', 'testLocation');
+  };
+
+  const startNmea = () => {
+    NmeaService.start();
+
+    DeviceEventEmitter.addListener('onNmeaReceive', event => {
+      console.log(event);
+
+      // will output:
+      // {
+      //   timestamp: 1543940192000,
+      //   message: "$GLGSV,3,1,11,72,62,303,,73,59,028,,74,59,264,,71,54,180,*6"
+      // }
+    });
+  };
+
+  const stopNmea = () => {
+    NmeaService.stop();
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -138,6 +172,43 @@ const App = (): React.JSX.Element => {
                 borderRadius: 10,
                 width: '40%',
               }}></View>
+          </Section>
+          <Section title="See Your Calendar Data">
+            <View
+              style={{
+                borderRadius: 10,
+              }}>
+              <Button title="Create Calendar" onPress={createCalendar} />
+            </View>
+            {'\n\n'}
+            <Text>
+              Text 1:{' '}
+              {location?.coords.latitude
+                ? location.coords.latitude.toFixed(3)
+                : null}
+            </Text>
+            {'\n'}
+            <Text>
+              Text 2:{' '}
+              {location?.coords.longitude
+                ? location.coords.longitude.toFixed(3)
+                : null}{' '}
+            </Text>
+          </Section>
+          <Section title="See Your NMEA Data">
+            <View
+              style={{
+                borderRadius: 10,
+              }}>
+              <Button title="Start" onPress={startNmea} />
+            </View>
+            {'\n'}
+            <View
+              style={{
+                borderRadius: 10,
+              }}>
+              <Button title="Stop" onPress={stopNmea} />
+            </View>
           </Section>
           <Section title="Debug">
             <DebugInstructions />
