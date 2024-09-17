@@ -1,4 +1,4 @@
-package com.testrnapp.calendarServices; // replace your-app-name with your app’s name
+package com.testrnapp.calendar; // replace your-app-name with your app’s name
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CalendarServicePackage implements ReactPackage {
+public class CalendarPackage implements ReactPackage {
 
    @Override
    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -20,7 +20,7 @@ public class CalendarServicePackage implements ReactPackage {
            ReactApplicationContext reactContext) {
        List<NativeModule> modules = new ArrayList<>();
 
-       modules.add(new CalendarServiceManager(reactContext));
+       modules.add(new CalendarModule(reactContext));
 
        return modules;
    }

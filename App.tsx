@@ -28,8 +28,9 @@ import Geolocation, {
   GeolocationResponse,
 } from '@react-native-community/geolocation';
 import {NativeModules} from 'react-native';
+import CalendarModule from './CalendarModule';
 
-const {CalendarServiceManager, NmeaService} = NativeModules;
+const {NmeaService} = NativeModules;
 
 // function findNumberOfSatellites(context){
 //     NativeModules.ToastExample.show("It's Starting to find satellites!", 1);
@@ -100,8 +101,16 @@ const App = (): React.JSX.Element => {
     console.log(location);
   };
 
-  const createCalendar = () => {
-    CalendarServiceManager.createCalendarEvent('testName', 'testLocation');
+  const createCalendar = async () => {
+    try {
+      const eventId = await CalendarModule.createCalendarEvent(
+        'testName',
+        'testLocation',
+      );
+      console.log(`Created a new event with id ${eventId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const startNmea = () => {
